@@ -214,9 +214,10 @@ class OwnCloudAdapter extends WebDAVAdapter
      */
     protected function parseXmlFromOCS($body, $config = [])
     {
-        $disableEntities = libxml_disable_entity_loader(true);
-        $internalErrors = libxml_use_internal_errors(true);
-
+        if (\PHP_VERSION_ID < 80000) {
+            $disableEntities = libxml_disable_entity_loader(true);
+            $internalErrors = libxml_use_internal_errors(true);
+        }
         try {
             // Allow XML to be retrieved even if there is no response body
             $xml = new \SimpleXMLElement(
@@ -226,11 +227,15 @@ class OwnCloudAdapter extends WebDAVAdapter
                 isset($config['ns']) ? $config['ns'] : '',
                 isset($config['ns_is_prefix']) ? $config['ns_is_prefix'] : false
             );
-            libxml_disable_entity_loader($disableEntities);
-            libxml_use_internal_errors($internalErrors);
+            if (\PHP_VERSION_ID < 80000) {
+                libxml_disable_entity_loader($disableEntities);
+                libxml_use_internal_errors($internalErrors);
+            }
         } catch (\Exception $e) {
-            libxml_disable_entity_loader($disableEntities);
-            libxml_use_internal_errors($internalErrors);
+            if (\PHP_VERSION_ID < 80000) {
+                libxml_disable_entity_loader($disableEntities);
+                libxml_use_internal_errors($internalErrors);
+            }
             throw new \Exception(
                 'Unable to parse response body into XML: ' . $e->getMessage()
             );
