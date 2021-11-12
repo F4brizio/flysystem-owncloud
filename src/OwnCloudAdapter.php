@@ -55,7 +55,7 @@ class OwnCloudAdapter extends WebDAVAdapter
      */
     public function getUrl($path)
     {
-        return $this->createShare($path)['url'];
+        return $this->createShare($path)['url']."/download";
     }
 
     /**
