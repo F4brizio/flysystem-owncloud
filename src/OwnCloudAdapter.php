@@ -55,7 +55,7 @@ class OwnCloudAdapter extends WebDAVAdapter
                     'path' => $path,
                     'shareType' => '3',
                     'permissions' => '1',
-                    'expiration' => $expiration
+                    'expireDate' => $expiration
                 ]
             ]);
         return ($this->parseXmlFromOCS($response->getBody()))['url']."/download";
