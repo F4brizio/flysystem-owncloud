@@ -45,7 +45,21 @@ class OwnCloudAdapter extends WebDAVAdapter
         $this->OcsConfig = $OcsConfig;
     }
 
+    public function temporaryUrl($path, $expiration, array $options = [])
+    {
 
+        $guzzle = $this->getGuzzleClient();
+        $response = $guzzle->request('POST',
+            '', [
+                'form_params' => [
+                    'path' => $path,
+                    'shareType' => '3',
+                    'permissions' => '1',
+                    'expiration' => $expiration
+                ]
+            ]);
+        return ($this->parseXmlFromOCS($response->getBody()))['url']."/download";
+    }
 
     /**
      * Implement for url() method
