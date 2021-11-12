@@ -1,11 +1,11 @@
 {
-  "name": "abdullahhafizh/flysystem-owncloud",
+  "name": "fabrizio/flysystem-owncloud",
   "description": "Flysystem adapter for Owncloud",
   "license": "MIT",
   "authors": [
     {
-      "name": "Abdullah Hafizh",
-      "email": "abdllhhafizh@gmail.com"
+      "name": "Fabrizio Piminchumo",
+      "email": "f4brizio.21@gmail.com"
     }
   ],
   "require": {
